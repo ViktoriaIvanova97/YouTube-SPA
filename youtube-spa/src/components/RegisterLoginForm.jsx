@@ -27,7 +27,7 @@ const RegisterForm = () => {
       )
       if (registerUser.fulfilled.match(result)) {
         alert('Регистрация успешна!')
-        navigate('/home/*')
+        navigate('/home/search')
       }
     } catch (error) {
       alert(error.message)
@@ -39,7 +39,7 @@ const RegisterForm = () => {
       const result = await dispatch(loginUser({ email, password }))
       if (loginUser.fulfilled.match(result)) {
         alert('Вход успешен')
-        navigate('/home/*')
+        navigate('/home/search')
       }
     } catch (error) {
       alert(error.message)

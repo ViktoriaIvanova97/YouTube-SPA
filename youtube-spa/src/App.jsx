@@ -8,13 +8,13 @@ import './App.css'
 function App() {
   return (
     <Routes>
-    <Route path="/registerform" element={<RegisterForm />} />
-      <Route path="/" element={<Home />}>
-      <Route index element={<Navigate to="/search" />} />
-      <Route path="search" element={<SearchPage />} />
-      <Route path="favorites" element={<FavoritesPage />} />
-    </Route>
-  </Routes>
+      <Route path="/registerform" element={<RegisterForm />} />
+      <Route path="/home/*" element={<Home />}>
+        <Route index element={<Navigate to="/search" />} />
+        <Route path="search" element={<SearchPage />} />
+        <Route path="favorites" element={<FavoritesPage />} />
+      </Route>
+    </Routes>
   )
 }
 
