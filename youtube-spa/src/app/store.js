@@ -2,15 +2,22 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
 import authReducer from '../slices/authSlice'
+import videosReducer from '../slices/videosSlice'
 
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['token'],
 }
+const videoPersistConfig = {
+  key: 'video',
+  storage,
+  whitelist: ['items'],
+}
 
 const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer), // ⚡
+  auth: persistReducer(authPersistConfig, authReducer),
+  videos: persistReducer(videoPersistConfig, videosReducer),
 })
 
 export const store = configureStore({
