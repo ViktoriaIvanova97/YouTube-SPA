@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Card, Input } from 'antd'
+import { Input, Button } from 'antd'
+import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import {
   selectorItems,
@@ -7,6 +8,8 @@ import {
   selectorItemsLoading,
 } from '../selectors/selectors'
 import { searchVideos } from '../api/youtubeApi'
+import VideoGrid from './shared/VideoGrid'
+import VideoList from './shared/VideoList'
 
 const { Search } = Input
 
@@ -17,6 +20,7 @@ const SearchPage = () => {
   const error = useSelector(selectorItemsError)
 
   const [query, setQuery] = useState('')
+  const [viewMode, setViewMode] = useState('grid')
 
   const handleSearch = (value) => {
     dispatch(searchVideos({ query: value }))
@@ -38,48 +42,31 @@ const SearchPage = () => {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <Row gutter={[16, 16]}>
-        {items.map((video) => (
-          <Col key={video.id.videoId} xs={24} sm={12} md={8} lg={6}>
-            <Card
-              hoverable
-              bodyStyle={{ padding: 0 }}
-              style={{
-                height: 250,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <iframe
-                width="100%"
-                height="180"
-                src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                title={video.snippet.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ borderRadius: '12px' }}
-              />
-              <Card.Meta
-                description={
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      width: '100%',
-                      padding: '0 5px',
-                    }}
-                  >
-                    {video.snippet.title}
-                  </div>
-                }
-              />
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <div
+        style={{
+          marginBottom: 20,
+          display: "flex",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Button
+          icon={<AppstoreOutlined />}
+          type={viewMode === 'grid' ? 'primary' : 'default'}
+          onClick={() => setViewMode('grid')}
+          style={{ marginRight: 10 }}
+        ></Button>
+        <Button
+          icon={<BarsOutlined />}
+          type={viewMode === 'list' ? 'primary' : 'default'}
+          onClick={() => setViewMode('list')}
+        ></Button>
+      </div>
+
+      {viewMode === 'grid' ? (
+        <VideoGrid items={items} />
+      ) : (
+        <VideoList items={items} />
+      )}
     </div>
   )
 }

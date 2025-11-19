@@ -9,8 +9,8 @@ const { Header, Content } = Layout
 
 const Home = () => {
   const location = useLocation()
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const activeKey = location.pathname.includes('favorites')
     ? 'favorites'
     : 'search'
@@ -33,6 +33,7 @@ const Home = () => {
           zIndex: 1000,
           display: 'flex',
           justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <Menu
@@ -52,13 +53,7 @@ const Home = () => {
             },
           ]}
         />
-        <Button
-          type="primary"
-          icon={<LogoutOutlined />}
-          onClick={
-            logOut
-          }
-        >
+        <Button type="primary" icon={<LogoutOutlined />} onClick={logOut}>
           Выйти
         </Button>
       </Header>
