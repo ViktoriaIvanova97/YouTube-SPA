@@ -10,6 +10,7 @@ import {
 import { searchVideos } from '../api/youtubeApi'
 import VideoGrid from './shared/VideoGrid'
 import VideoList from './shared/VideoList'
+import SaveHeart from './shared/SaveHeart'
 
 const { Search } = Input
 
@@ -38,6 +39,7 @@ const SearchPage = () => {
         onSearch={handleSearch}
         loading={loading}
         style={{ maxWidth: 550, marginBottom: 20 }}
+        suffix={<SaveHeart query={query} />}
       />
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -45,8 +47,8 @@ const SearchPage = () => {
       <div
         style={{
           marginBottom: 20,
-          display: "flex",
-          justifyContent: "flex-end",
+          display: 'flex',
+          justifyContent: 'flex-end',
         }}
       >
         <Button

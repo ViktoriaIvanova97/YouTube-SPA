@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
 import authReducer from '../slices/authSlice'
 import videosReducer from '../slices/videosSlice'
+import favoritesReducer from '../slices/favoriteSlice'
 
 const authPersistConfig = {
   key: 'auth',
@@ -18,6 +19,7 @@ const videoPersistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   videos: persistReducer(videoPersistConfig, videosReducer),
+  favorites: favoritesReducer
 })
 
 export const store = configureStore({
