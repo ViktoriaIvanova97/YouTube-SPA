@@ -1,11 +1,14 @@
 import { useState } from 'react'
-import { Modal, Tooltip, message } from 'antd'
+import { Tooltip, message,Form } from 'antd'
 import { HeartOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { addFavorite } from '../../slices/favoriteSlice'
+import SaveQueryModal from '../shared/Modal'
 
 const SaveHeart = ({ query }) => {
-  const [open, setOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [form] = Form.useForm();
+  const [maxCount, setMaxCount] = useState(25);
   const dispatch = useDispatch()
 
   const handleSave = () => {
@@ -18,7 +21,7 @@ const SaveHeart = ({ query }) => {
     <>
       <Tooltip title="Сохранить в избранное">
         <span
-          onClick={() => setOpen(true)}
+          onClick={() => setModalOpen(true)}
           style={{
             cursor: 'pointer',
             fontSize: 20,
@@ -30,16 +33,15 @@ const SaveHeart = ({ query }) => {
         </span>
       </Tooltip>
 
-      <Modal
-        title="Сохранить запрос"
-        open={open}
-        onOk={handleSave}
-        onCancel={() => setOpen(false)}
-        okText="Сохранить"
-        cancelText="Отмена"
-      >
-        <p>Сохранить запрос «{query}» в избранное?</p>
-      </Modal>
+      <SaveQueryModal
+        open={modalOpen}
+        query={query}
+        onSave={handleSave}
+        onCancel={() => setModalOpen(false)}
+        form={form}
+        maxCount={maxCount}
+        setMaxCount={setMaxCount}
+      />
     </>
   )
 }
