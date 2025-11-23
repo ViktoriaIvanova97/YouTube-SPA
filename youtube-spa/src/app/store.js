@@ -15,11 +15,15 @@ const videoPersistConfig = {
   storage,
   whitelist: ['items'],
 }
-
+const favoritePersistConfig = {
+  key: 'favorite',
+  storage,
+  whitelist: ['favorite'],
+}
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   videos: persistReducer(videoPersistConfig, videosReducer),
-  favorites: favoritesReducer
+  favorites: persistReducer(favoritePersistConfig, favoritesReducer),
 })
 
 export const store = configureStore({

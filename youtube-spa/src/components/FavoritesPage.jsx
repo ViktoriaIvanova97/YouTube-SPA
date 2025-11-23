@@ -1,8 +1,17 @@
+import { useSelector } from "react-redux"
+import { selectorFavorites } from "../selectors/selectors"
+
 const FavoritesPage = () => {
+	const favorites = useSelector(selectorFavorites)
+	console.log(favorites);
 	return (
-	  <div>
+		<div>
 		<h2>Избранное</h2>
-			<p>lorem*1000</p>
+		<ul>
+		  {favorites.map((item, index) => (
+			<li key={index}>{item}</li>
+		  ))} 
+		 </ul>
 	  </div>
 	)
   }

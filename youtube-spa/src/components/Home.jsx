@@ -44,12 +44,12 @@ const Home = () => {
             {
               key: 'search',
               icon: <SearchOutlined />,
-              label: <Link to="/search">Поиск</Link>,
+              label: <Link to="/home/search">Поиск</Link>,
             },
             {
               key: 'favorites',
               icon: <StarOutlined />,
-              label: <Link to="/favorites">Избранное</Link>,
+              label: <Link to="/home/favorites">Избранное</Link>,
             },
           ]}
         />

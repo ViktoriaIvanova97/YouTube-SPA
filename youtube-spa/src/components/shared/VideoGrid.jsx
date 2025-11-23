@@ -1,12 +1,11 @@
 import { Row, Col, Card } from 'antd'
 
-
 const VideoGrid = ({ items }) => {
   return (
     <Row gutter={[16, 16]}>
       {items.map((video) => (
         <Col key={video.id.videoId} xs={24} sm={12} md={8} lg={6}>
-          <Card hoverable style={{ height: 220 }}>
+          <Card hoverable style={{ minHeight: 220 }}>
             <iframe
               width="100%"
               height="150"
@@ -14,11 +13,11 @@ const VideoGrid = ({ items }) => {
               title={video.snippet.title}
               frameBorder="0"
               allowFullScreen
-              style={{ borderRadius: '12px', }}
-              
+              style={{ borderRadius: '12px' }}
             />
+
             <Card.Meta
-              description={
+              title={
                 <div
                   style={{
                     overflow: 'hidden',
@@ -29,6 +28,20 @@ const VideoGrid = ({ items }) => {
                   }}
                 >
                   {video.snippet.title}
+                </div>
+              }
+              description={
+                <div
+                  style={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    width: '100%',
+                    padding: '0 5px',
+                    color: 'gray',
+                  }}
+                >
+                  {video.snippet.channelTitle}
                 </div>
               }
             />

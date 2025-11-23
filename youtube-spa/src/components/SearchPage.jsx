@@ -25,7 +25,6 @@ const SearchPage = () => {
 
   const handleSearch = (value) => {
     dispatch(searchVideos({ query: value }))
-    setQuery('')
   }
 
   return (
@@ -48,20 +47,23 @@ const SearchPage = () => {
         style={{
           marginBottom: 20,
           display: 'flex',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
         }}
       >
-        <Button
-          icon={<AppstoreOutlined />}
-          type={viewMode === 'grid' ? 'primary' : 'default'}
-          onClick={() => setViewMode('grid')}
-          style={{ marginRight: 10 }}
-        ></Button>
-        <Button
-          icon={<BarsOutlined />}
-          type={viewMode === 'list' ? 'primary' : 'default'}
-          onClick={() => setViewMode('list')}
-        ></Button>
+        <h3>{query ? `Видео по запросу "${query}"` : ''}</h3>
+        <div>
+          <Button
+            icon={<AppstoreOutlined />}
+            type={viewMode === 'grid' ? 'primary' : 'default'}
+            onClick={() => setViewMode('grid')}
+            style={{ marginRight: 10 }}
+          ></Button>
+          <Button
+            icon={<BarsOutlined />}
+            type={viewMode === 'list' ? 'primary' : 'default'}
+            onClick={() => setViewMode('list')}
+          ></Button>
+        </div>
       </div>
 
       {viewMode === 'grid' ? (

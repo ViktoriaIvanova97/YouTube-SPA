@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  favorite:[]
+}
+
 const favoritesSlice = createSlice({
   name: 'favorites',
-  initialState: [],
+  initialState,
   reducers: {
     addFavorite: (state, action) => {
-      state.push(action.payload);
+      state.favorite.push(action.payload);
     },
   },
 });
