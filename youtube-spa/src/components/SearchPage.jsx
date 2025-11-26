@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
+import { useLocation } from 'react-router-dom'
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   selectorItems,
   selectorItemsError,
@@ -23,9 +24,19 @@ const SearchPage = () => {
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState('grid')
 
+  const location = useLocation()
+
   const handleSearch = (value) => {
+    setQuery(value)
     dispatch(searchVideos({ query: value }))
   }
+
+  useEffect(() => {
+    if (location.state?.query) {
+      setQuery(location.state.query)
+      dispatch(searchVideos({ query: location.state.query }))
+    }
+  }, [location.state])
 
   return (
     <div style={{ width: '100%', boxSizing: 'border-box' }}>

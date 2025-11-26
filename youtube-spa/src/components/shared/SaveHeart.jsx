@@ -12,8 +12,8 @@ const SaveHeart = ({ query }) => {
   const dispatch = useDispatch()
 
   const handleSave = () => {
-    dispatch(addFavorite(query))
-    setOpen(false)
+    dispatch(addFavorite({query}))
+    setModalOpen(false)
     message.success('Поиск сохранён в избранное')
   }
 

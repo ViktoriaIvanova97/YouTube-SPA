@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
   favorite:[]
@@ -9,7 +10,10 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     addFavorite: (state, action) => {
-      state.favorite.push(action.payload);
+      state.favorite.push({
+        id: uuidv4(),
+        query: action.payload.query
+      });
     },
   },
 });
