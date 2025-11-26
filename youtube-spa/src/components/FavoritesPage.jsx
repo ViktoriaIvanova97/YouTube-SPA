@@ -4,7 +4,7 @@ import { selectorFavorites } from '../selectors/selectors'
 import { Card, Button, Space, Form } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import SaveQueryModal from './shared/Modal'
-import { updateFavorite } from '../slices/favoriteSlice'
+import { updateFavorite,deleteFavorite } from '../slices/favoriteSlice'
 
 const FavoritesPage = () => {
   const favorites = useSelector(selectorFavorites)
@@ -46,6 +46,10 @@ const FavoritesPage = () => {
     setModalOpen(false)
   }
 
+	const handleDelete = (id) => {
+	  dispatch(deleteFavorite(id))
+  }
+
   return (
     <div>
       <h2>Избранное</h2>
@@ -59,7 +63,9 @@ const FavoritesPage = () => {
                 Выполнить
               </Button>
               <Button onClick={() => handleEdit(item)}>Редактировать</Button>
-              <Button danger>Удалить</Button>
+              <Button danger onClick={() => handleDelete(item.id)}>
+                Удалить
+              </Button>
             </Space>
           }
           bodyStyle={{ display: 'none' }}

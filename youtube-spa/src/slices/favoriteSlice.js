@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
 const initialState = {
-  favorite:[]
+  favorite: [],
 }
 
 const favoritesSlice = createSlice({
@@ -16,17 +16,21 @@ const favoritesSlice = createSlice({
         name: action.payload.name,
         sort: action.payload.sort,
         maxCount: action.payload.maxCount,
-      });
+      })
     },
     updateFavorite: (state, action) => {
-      const { id, query, name, sort, maxCount } = action.payload;
-      const index = state.favorite.findIndex(f => f.id === id);
+      const { id, query, name, sort, maxCount } = action.payload
+      const index = state.favorite.findIndex((f) => f.id === id)
       if (index !== -1) {
-        state.favorite[index] = { id, query, name, sort, maxCount };
+        state.favorite[index] = { id, query, name, sort, maxCount }
       }
     },
+    deleteFavorite: (state, action) => {
+      state.favorite = state.favorite.filter((el) => el.id !== action.payload)
+    },
   },
-});
+})
 
-export const { addFavorite ,updateFavorite} = favoritesSlice.actions;
-export default favoritesSlice.reducer;
+export const { addFavorite, updateFavorite, deleteFavorite } =
+  favoritesSlice.actions
+export default favoritesSlice.reducer
