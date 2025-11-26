@@ -23,20 +23,23 @@ const SearchPage = () => {
 
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState('grid')
+  const [maxCount, setMaxCount] = useState(12)
 
   const location = useLocation()
 
-  const handleSearch = (value) => {
+  const handleSearch = (value, count = maxCount) => {
     setQuery(value)
-    dispatch(searchVideos({ query: value }))
+    dispatch(searchVideos({ query: value, maxCount: count }))
   }
 
   useEffect(() => {
     if (location.state?.query) {
       setQuery(location.state.query)
-      dispatch(searchVideos({ query: location.state.query }))
+      setMaxCount(location.state.maxCount )
+      dispatch(searchVideos({ query: location.state.query, maxCount: location.state.maxCount }))
     }
   }, [location.state])
+
 
   return (
     <div style={{ width: '100%', boxSizing: 'border-box' }}>
@@ -78,9 +81,9 @@ const SearchPage = () => {
       </div>
 
       {viewMode === 'grid' ? (
-        <VideoGrid items={items} />
+        <VideoGrid items={items} maxCount={ maxCount } />
       ) : (
-        <VideoList items={items} />
+        <VideoList items={items} maxCount={ maxCount }/>
       )}
     </div>
   )

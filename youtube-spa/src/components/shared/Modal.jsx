@@ -26,7 +26,7 @@ const SaveQueryModal = ({
         </Form.Item>
 
         <Form.Item
-          label="*Название"
+          label="Название"
           name="name"
           rules={[{ required: true, message: 'Введите название' }]}
         >

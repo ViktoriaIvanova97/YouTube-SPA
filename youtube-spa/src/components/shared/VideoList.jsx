@@ -4,7 +4,7 @@ import { Card } from 'antd'
 const VideoList = ({ items }) => {
   return (
     <div>
-      {items.map((video) => (
+      {items.slice(0, maxCount).map((video) => (
         <Card
           key={video.id.videoId}
           hoverable

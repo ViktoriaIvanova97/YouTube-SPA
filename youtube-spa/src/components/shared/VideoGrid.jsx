@@ -1,9 +1,9 @@
 import { Row, Col, Card } from 'antd'
 
-const VideoGrid = ({ items }) => {
+const VideoGrid = ({ items, maxCount }) => {
   return (
     <Row gutter={[16, 16]}>
-      {items.map((video) => (
+      {items.slice(0, maxCount).map((video) => (
         <Col key={video.id.videoId} xs={24} sm={12} md={8} lg={6}>
           <Card hoverable style={{ minHeight: 220 }}>
             <iframe
