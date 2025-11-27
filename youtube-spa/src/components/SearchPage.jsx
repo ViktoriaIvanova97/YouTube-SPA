@@ -12,6 +12,7 @@ import { searchVideos } from '../api/youtubeApi'
 import VideoGrid from './shared/VideoGrid'
 import VideoList from './shared/VideoList'
 import SaveHeart from './shared/SaveHeart'
+import { setQueryAndCount } from '../slices/videosSlice'
 
 const { Search } = Input
 
@@ -30,6 +31,7 @@ const SearchPage = () => {
   const handleSearch = (value) => {
     setQuery(value)
     setMaxCount(12)
+    dispatch(setQueryAndCount({ query: value, maxCount }))
     dispatch(searchVideos({ query: value, maxCount }))
   }
 
@@ -39,6 +41,9 @@ const SearchPage = () => {
       const count = location.state.maxCount
       setMaxCount(count)
       dispatch(
+        setQueryAndCount({ query: location.state.query, maxCount: count })
+      )
+      dispatch(
         searchVideos({
           query: location.state.query,
           maxCount: count,
@@ -46,6 +51,7 @@ const SearchPage = () => {
       )
     }
   }, [location.state])
+
 
   return (
     <div style={{ width: '100%', boxSizing: 'border-box' }}>

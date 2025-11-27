@@ -5,12 +5,19 @@ const initialState = {
   items: [],
   loading: false,
   error: null,
+  query: '',
+  maxCount: 12,
 }
 
 const videoSlice = createSlice({
   name: 'videos',
   initialState,
-  reducers: {},
+  reducers: {
+    setQueryAndCount: (state, action) => {
+      state.query = action.payload.query
+      state.maxCount = action.payload.maxCount
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(searchVideos.pending, (state) => {
@@ -18,7 +25,9 @@ const videoSlice = createSlice({
         state.error = null
       })
       .addCase(searchVideos.fulfilled, (state, action) => {
-        state.items = action.payload
+        state.items = action.payload.items
+        state.query = action.payload.query
+        state.maxCount = action.payload.maxCount
         state.loading = false
       })
       .addCase(searchVideos.rejected, (state, action) => {
@@ -27,5 +36,5 @@ const videoSlice = createSlice({
       })
   },
 })
-
+export const { setQueryAndCount } = videoSlice.actions
 export default videoSlice.reducer

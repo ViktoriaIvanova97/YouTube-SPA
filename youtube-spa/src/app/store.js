@@ -13,7 +13,7 @@ const authPersistConfig = {
 const videoPersistConfig = {
   key: 'video',
   storage,
-  whitelist: ['items'],
+  whitelist: ['items','query', 'maxCount'],
 }
 const favoritePersistConfig = {
   key: 'favorite',

@@ -56,7 +56,7 @@ const FavoritesPage = () => {
       {favorites.map((item) => (
         <Card
           key={item.id}
-          title={item.query}
+          title={item.name}
           extra={
             <Space>
               <Button type="primary" onClick={() => handleExecute(item)}>

@@ -19,11 +19,19 @@ const SaveHeart = ({ query }) => {
     message.success('Поиск сохранён в избранное')
   }
 
+  const openModal = () => {
+    form.setFieldsValue({
+      query,
+      name: query,
+    })
+    setModalOpen(true)
+  }
+
   return (
     <>
       <Tooltip title="Сохранить в избранное">
         <span
-          onClick={() => setModalOpen(true)}
+          onClick={openModal}
           style={{
             cursor: 'pointer',
             fontSize: 20,
@@ -43,7 +51,7 @@ const SaveHeart = ({ query }) => {
         form={form}
         maxCount={maxCount}
         setMaxCount={setMaxCount}
-        isEdit={false} 
+        isEdit={false}
       />
     </>
   )

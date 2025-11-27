@@ -31,7 +31,7 @@ const SaveQueryModal = ({
           name="name"
           rules={[{ required: true, message: 'Введите название' }]}
         >
-          <Input placeholder="Укажите название" />
+          <Input />
         </Form.Item>
 
         <Form.Item label="Сортировать по" name="sort">

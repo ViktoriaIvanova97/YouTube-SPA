@@ -77,7 +77,7 @@ export const searchVideos = createAsyncThunk(
         },
       });
 
-      return response.data.items; 
+      return { items: response.data.items, query, maxCount }
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data?.error?.message || error.message);
     }
