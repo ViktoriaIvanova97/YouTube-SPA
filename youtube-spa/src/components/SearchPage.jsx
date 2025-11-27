@@ -22,7 +22,7 @@ const SearchPage = () => {
   const error = useSelector(selectorItemsError)
 
   const [query, setQuery] = useState('')
-  const [viewMode, setViewMode] = useState('grid')
+  const [viewMode, setViewMode] = useState('list')
   const [maxCount, setMaxCount] = useState(12)
 
   const location = useLocation()
@@ -30,13 +30,13 @@ const SearchPage = () => {
   const handleSearch = (value) => {
     setQuery(value)
     setMaxCount(12)
-    dispatch(searchVideos({ query: value, maxCount: 12 }))
+    dispatch(searchVideos({ query: value, maxCount }))
   }
 
   useEffect(() => {
     if (location.state?.query) {
       setQuery(location.state.query)
-      const count = location.state.maxCount || 12
+      const count = location.state.maxCount
       setMaxCount(count)
       dispatch(
         searchVideos({
@@ -73,23 +73,23 @@ const SearchPage = () => {
         <h3>{query ? `Видео по запросу "${query}"` : ''}</h3>
         <div>
           <Button
-            icon={<AppstoreOutlined />}
-            type={viewMode === 'grid' ? 'primary' : 'default'}
-            onClick={() => setViewMode('grid')}
-            style={{ marginRight: 10 }}
-          ></Button>
-          <Button
             icon={<BarsOutlined />}
             type={viewMode === 'list' ? 'primary' : 'default'}
             onClick={() => setViewMode('list')}
+            style={{ marginRight: 10 }}
+          ></Button>
+          <Button
+            icon={<AppstoreOutlined />}
+            type={viewMode === 'grid' ? 'primary' : 'default'}
+            onClick={() => setViewMode('grid')}
           ></Button>
         </div>
       </div>
 
-      {viewMode === 'grid' ? (
-        <VideoGrid items={items} maxCount={maxCount} />
-      ) : (
+      {viewMode === 'list' ? (
         <VideoList items={items} maxCount={maxCount} />
+      ) : (
+        <VideoGrid items={items} maxCount={maxCount} />
       )}
     </div>
   )

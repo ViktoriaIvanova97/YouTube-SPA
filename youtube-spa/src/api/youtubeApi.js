@@ -65,13 +65,13 @@ export const loginUser = createAsyncThunk(
 
 export const searchVideos = createAsyncThunk(
   'videos/searchVideos',
-  async ({ query }, thunkAPI) => {
+  async ({ query , maxCount }, thunkAPI) => {
     try {
       const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
         params: {
           part: 'snippet',
           type: 'video',
-          maxResults: 12,
+          maxResults: maxCount,
           q: query,
           key: API_KEY,
         },

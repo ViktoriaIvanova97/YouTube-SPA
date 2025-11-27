@@ -1,7 +1,6 @@
 import { Card } from 'antd'
 
-
-const VideoList = ({ items }) => {
+const VideoList = ({ items, maxCount }) => {
   return (
     <div>
       {items.slice(0, maxCount).map((video) => (
@@ -10,10 +9,15 @@ const VideoList = ({ items }) => {
           hoverable
           style={{
             marginBottom: 16,
-            padding: 16,
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
             <iframe
               width="300"
               height="180"
@@ -36,15 +40,41 @@ const VideoList = ({ items }) => {
                 width: '100%',
               }}
             >
-              <Card.Meta title={video.snippet.title} />
+              <Card.Meta
+                title={
+                  <div
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      width: '100%',
+                      padding: '0 5px',
+                    }}
+                  >
+                    {video.snippet.title}
+                  </div>
+                }
+                description={
+                  <div
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      width: '100%',
+                      padding: '0 5px',
+                      color: 'gray',
+                    }}
+                  >
+                    {video.snippet.channelTitle}
+                  </div>
+                }
+              />
             </div>
           </div>
         </Card>
       ))}
     </div>
-  );
-};
-
-
+  )
+}
 
 export default VideoList

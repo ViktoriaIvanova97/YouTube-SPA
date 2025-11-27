@@ -24,7 +24,7 @@ const FavoritesPage = () => {
 
   const handleEdit = (item) => {
     setEditingItem(item)
-    setMaxCount(item.maxCount || 25)
+    setMaxCount(item.maxCount )
     form.setFieldsValue({
       query: item.query,
       name: item.name,
