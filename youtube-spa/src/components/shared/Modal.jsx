@@ -10,6 +10,7 @@ const SaveQueryModal = ({
   form,
   maxCount,
   setMaxCount,
+  isEdit,
 }) => {
   return (
     <Modal
@@ -21,8 +22,8 @@ const SaveQueryModal = ({
       cancelText="Не сохранять"
     >
       <Form form={form} layout="vertical" onFinish={onSave}>
-        <Form.Item label="Запрос">
-          <Input value={query} disabled />
+        <Form.Item label="Запрос" name="query" initialValue={query}>
+          <Input disabled={!isEdit} />
         </Form.Item>
 
         <Form.Item

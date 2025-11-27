@@ -4,7 +4,7 @@ import { selectorFavorites } from '../selectors/selectors'
 import { Card, Button, Space, Form } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import SaveQueryModal from './shared/Modal'
-import { updateFavorite,deleteFavorite } from '../slices/favoriteSlice'
+import { updateFavorite, deleteFavorite } from '../slices/favoriteSlice'
 
 const FavoritesPage = () => {
   const favorites = useSelector(selectorFavorites)
@@ -12,7 +12,6 @@ const FavoritesPage = () => {
   const [editingItem, setEditingItem] = useState(null)
   const [form] = Form.useForm()
   const [maxCount, setMaxCount] = useState(25)
-  console.log(favorites)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -27,6 +26,7 @@ const FavoritesPage = () => {
     setEditingItem(item)
     setMaxCount(item.maxCount || 25)
     form.setFieldsValue({
+      query: item.query,
       name: item.name,
       sort: item.sort || 'relevance',
     })
@@ -37,7 +37,7 @@ const FavoritesPage = () => {
     dispatch(
       updateFavorite({
         id: editingItem.id,
-        query: editingItem.query,
+        query: values.query,
         name: values.name,
         sort: values.sort,
         maxCount,
@@ -46,8 +46,8 @@ const FavoritesPage = () => {
     setModalOpen(false)
   }
 
-	const handleDelete = (id) => {
-	  dispatch(deleteFavorite(id))
+  const handleDelete = (id) => {
+    dispatch(deleteFavorite(id))
   }
 
   return (
@@ -74,12 +74,13 @@ const FavoritesPage = () => {
       {editingItem && (
         <SaveQueryModal
           open={modalOpen}
-          query={editingItem.query}
+          query={editingItem?.query}
           onSave={handleSave}
           onCancel={() => setModalOpen(false)}
           form={form}
           maxCount={maxCount}
           setMaxCount={setMaxCount}
+          isEdit={true}
         />
       )}
     </div>

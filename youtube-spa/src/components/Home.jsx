@@ -15,11 +15,9 @@ const Home = () => {
     ? 'favorites'
     : 'search'
 
-  const logOut = async () => {
+  const logOut = () => {
     dispatch(logout())
-    await persistor.flush()
-    localStorage.clear()
-    navigate('/registerform')
+    navigate('/')
   }
 
   return (

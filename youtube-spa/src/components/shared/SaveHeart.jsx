@@ -43,6 +43,7 @@ const SaveHeart = ({ query }) => {
         form={form}
         maxCount={maxCount}
         setMaxCount={setMaxCount}
+        isEdit={false} 
       />
     </>
   )
