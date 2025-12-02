@@ -63,8 +63,9 @@ export const loginUser = createAsyncThunk(
 
 export const searchVideos = createAsyncThunk(
   'videos/searchVideos',
-  async ({ query, maxCount, sort = 'relevance' }, thunkAPI) => {
+  async ({ query, maxCount, sort }, thunkAPI) => {
     try {
+      console.log('Запрос к YouTube:', { query, maxCount, sort })
       const response = await axios.get(
         'https://www.googleapis.com/youtube/v3/search',
         {

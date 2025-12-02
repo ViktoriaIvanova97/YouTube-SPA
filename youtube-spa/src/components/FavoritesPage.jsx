@@ -18,13 +18,13 @@ const FavoritesPage = () => {
 
   const handleExecute = (item) => {
     navigate('/home/search', {
-      state: { query: item.query, maxCount: item.maxCount },
+      state: { query: item.query, maxCount: item.maxCount, sort: item.sort },
     })
   }
 
   const handleEdit = (item) => {
     setEditingItem(item)
-    setMaxCount(item.maxCount )
+    setMaxCount(item.maxCount)
     form.setFieldsValue({
       query: item.query,
       name: item.name,

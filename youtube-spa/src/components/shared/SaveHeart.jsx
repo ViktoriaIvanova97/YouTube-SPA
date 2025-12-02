@@ -23,6 +23,7 @@ const SaveHeart = ({ query }) => {
     form.setFieldsValue({
       query,
       name: query,
+      sort: 'relevance',
     })
     setModalOpen(true)
   }
