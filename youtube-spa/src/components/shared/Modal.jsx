@@ -53,7 +53,6 @@ const SaveQueryModal = ({
             max={50}
             value={maxCount}
             onChange={setMaxCount}
-            tooltip={{ open: true }}
           />
         </Form.Item>
       </Form>

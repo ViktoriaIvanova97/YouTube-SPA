@@ -2,45 +2,22 @@ import { Row, Col, Card } from 'antd'
 
 const VideoGrid = ({ items, maxCount }) => {
   return (
-    <Row gutter={[16, 16]}>
+    <Row className="video-grid">
       {items.slice(0, maxCount).map((video) => (
         <Col key={video.id.videoId} xs={24} sm={12} md={8} lg={6}>
-          <Card hoverable style={{ minHeight: 220 }}>
+          <Card hoverable>
             <iframe
-              width="100%"
-              height="150"
               src={`https://www.youtube.com/embed/${video.id.videoId}`}
               title={video.snippet.title}
               frameBorder="0"
               allowFullScreen
-              style={{ borderRadius: '12px' }}
+              className="video-thumb"
             />
 
             <Card.Meta
-              title={
-                <div
-                  style={{
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    width: '100%',
-                    padding: '0 5px',
-                  }}
-                >
-                  {video.snippet.title}
-                </div>
-              }
+              title={<div className="video-title">{video.snippet.title}</div>}
               description={
-                <div
-                  style={{
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    whiteSpace: 'nowrap',
-                    width: '100%',
-                    padding: '0 5px',
-                    color: 'gray',
-                  }}
-                >
+                <div className="video-channel">
                   {video.snippet.channelTitle}
                 </div>
               }

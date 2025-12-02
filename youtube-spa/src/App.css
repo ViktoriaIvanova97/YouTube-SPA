@@ -29,3 +29,250 @@ body,
 .read-the-docs {
   color: #888;
 }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3a1927;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #292253;
+  padding: 0 24px;
+  height: 64px;
+}
+
+.header-content {
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  padding: 24px;
+  background-color: #f4f1ea;
+  box-sizing: border-box;
+}
+
+.ant-menu-dark {
+  background-color: transparent !important;
+  border-bottom: none;
+}
+
+.ant-menu-dark .ant-menu-item {
+  color: #cccccc !important;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+  color: #fff !important;
+  font-weight: 400;
+  background-color: transparent !important;
+}
+
+.ant-menu-dark .ant-menu-item:hover {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+.ant-btn-primary {
+  background-color: #b95b6ed6 !important;
+  border: none !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.ant-btn-primary:hover {
+  background-color: #d9516dfc !important;
+}
+
+.search-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  background-color: #f4f1ea;
+}
+
+.ant-input-search {
+  max-width: 550px;
+  margin-bottom: 20px;
+}
+
+.ant-input {
+  border-radius: 6px;
+  border: 1px solid #d46a8c;
+  background-color: #fff;
+  color: #3a1927;
+}
+
+.ant-input::placeholder {
+  color: #999;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: #d46a8c !important;
+  border: none !important;
+  color: white !important;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.ant-btn.ant-btn-primary:hover {
+  background-color: #c45a6a !important;
+}
+
+.search-heading {
+  color: #3a1927;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.view-toggle-btn {
+  background-color: transparent !important;
+  border: none !important;
+  color: #3a1927 !important;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.view-toggle-btn:hover {
+  color: #a8324a !important;
+}
+
+.view-toggle-btn.ant-btn-primary {
+  background-color: #8a2c3f !important;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  background-color: rgba(255, 255, 255, 0);
+  /* box-shadow: 0 2px 6px rgba(58, 25, 39, 0.06); 
+  transition: box-shadow 0.2s ease, transform 0.2s ease; */
+}
+.ant-col {
+  flex: unset !important;
+  max-width: unset !important;
+  width: 100% !important;
+}
+
+.video-thumb {
+  position: relative;
+  /* width: 100%; */
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f4f1ea;
+}
+
+.video-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.video-thumb:hover img {
+  transform: scale(1.03);
+  filter: brightness(0.94);
+}
+
+.video-thumb .play-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(168, 50, 74, 0.9);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  backdrop-filter: saturate(1.2);
+}
+
+.video-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.video-title {
+  color: #3a1927;
+  font-weight: 600;
+  margin: 0 0 6px;
+  line-height: 1.25;
+}
+
+.video-channel {
+  color: #7a6f69;
+  font-size: 13px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.video-card.grid {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.video-card.grid .video-thumb {
+  margin-bottom: 10px;
+}
+
+.video-card.grid .video-title {
+  font-size: 14px;
+}
+
+.video-card.grid .video-channel {
+  font-size: 12px;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.video-card.list .video-title {
+  font-size: 16px;
+}
+
+.video-card.list .video-channel {
+  font-size: 13px;
+}
+
+.ant-card .ant-card-body {
+  border: 2px solid #dddd;
+  padding: 0;
+  border-radius: 11px;
+}
+.ant-card .ant-card-meta {
+  margin: 2px 8px;
+  display: flex;
+}
+
+.ant-card-meta-detail {
+  margin: 0;
+}

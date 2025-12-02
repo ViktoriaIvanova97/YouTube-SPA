@@ -22,18 +22,7 @@ const Home = () => {
 
   return (
     <Layout style={{ height: '100vh', overflow: 'hidden' }}>
-      <Header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
+      <Header className="header">
         <Menu
           theme="dark"
           mode="horizontal"
@@ -41,30 +30,20 @@ const Home = () => {
           items={[
             {
               key: 'search',
-              icon: <SearchOutlined />,
-              label: <Link to="/home/search">Поиск</Link>,
+              label: <Link to="/home/search">Search</Link>,
             },
             {
               key: 'favorites',
-              icon: <StarOutlined />,
-              label: <Link to="/home/favorites">Избранное</Link>,
+              label: <Link to="/home/favorites">Favorites</Link>,
             },
           ]}
         />
-        <Button type="primary" icon={<LogoutOutlined />} onClick={logOut}>
-          Выйти
+        <Button type="primary" onClick={logOut}>
+          Log out
         </Button>
       </Header>
 
-      <Content
-        style={{
-          marginTop: 64,
-          height: 'calc(100vh - 64px)',
-          overflowY: 'auto',
-          padding: '24px',
-          boxSizing: 'border-box',
-        }}
-      >
+      <Content className="header-content">
         <Outlet />
       </Content>
     </Layout>

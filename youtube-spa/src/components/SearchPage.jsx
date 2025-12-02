@@ -64,7 +64,7 @@ const SearchPage = () => {
   }, [location.state])
 
   return (
-    <div style={{ width: '100%', boxSizing: 'border-box' }}>
+    <div className="search-page">
       <Search
         placeholder="Введите запрос"
         enterButton="Поиск"
@@ -79,10 +79,6 @@ const SearchPage = () => {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      {!loading && searchText && items.length > 0 && (
-        <h3 style={{ marginTop: 10 }}>Видео по запросу "{searchText}"</h3>
-      )}
-
       <div
         style={{
           marginBottom: 20,
@@ -90,19 +86,34 @@ const SearchPage = () => {
           justifyContent: 'space-between',
         }}
       >
-        <div>
-          <Button
-            icon={<BarsOutlined />}
-            type={viewMode === 'list' ? 'primary' : 'default'}
-            onClick={() => setViewMode('list')}
-            style={{ marginRight: 10 }}
-          ></Button>
-          <Button
-            icon={<AppstoreOutlined />}
-            type={viewMode === 'grid' ? 'primary' : 'default'}
-            onClick={() => setViewMode('grid')}
-          ></Button>
+        <div style={{ minHeight: 24 }}>
+          <h3
+            style={{
+              marginTop: 10,
+              visibility:
+                !loading && searchText && items.length > 0
+                  ? 'visible'
+                  : 'hidden',
+            }}
+          >
+            Видео по запросу "{searchText}"
+          </h3>
         </div>
+        <div>
+      <Button
+        icon={<BarsOutlined />}
+        className="view-toggle-btn"
+        type={viewMode === 'list' ? 'primary' : 'default'}
+        onClick={() => setViewMode('list')}
+        style={{ marginRight: 10 }}
+      />
+      <Button
+        icon={<AppstoreOutlined />}
+        className="view-toggle-btn"
+        type={viewMode === 'grid' ? 'primary' : 'default'}
+        onClick={() => setViewMode('grid')}
+      />
+    </div>
       </div>
 
       {viewMode === 'list' ? (

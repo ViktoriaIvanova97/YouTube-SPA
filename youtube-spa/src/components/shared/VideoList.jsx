@@ -2,15 +2,9 @@ import { Card } from 'antd'
 
 const VideoList = ({ items, maxCount }) => {
   return (
-    <div>
+    <div className="video-list">
       {items.slice(0, maxCount).map((video) => (
-        <Card
-          key={video.id.videoId}
-          hoverable
-          style={{
-            marginBottom: 16,
-          }}
-        >
+        <Card key={video.id.videoId} hoverable>
           <div
             style={{
               display: 'flex',
@@ -25,46 +19,14 @@ const VideoList = ({ items, maxCount }) => {
               title={video.snippet.title}
               frameBorder="0"
               allowFullScreen
-              style={{
-                borderRadius: '12px',
-                marginRight: 16,
-                flexShrink: 0,
-              }}
+              className="video-thumb"
             />
 
-            <div
-              style={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                width: '100%',
-              }}
-            >
+            <div style={{ width: '100%' }}>
               <Card.Meta
-                title={
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      width: '100%',
-                      padding: '0 5px',
-                    }}
-                  >
-                    {video.snippet.title}
-                  </div>
-                }
+                title={<div className="video-title">{video.snippet.title}</div>}
                 description={
-                  <div
-                    style={{
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                      width: '100%',
-                      padding: '0 5px',
-                      color: 'gray',
-                    }}
-                  >
+                  <div className="video-channel">
                     {video.snippet.channelTitle}
                   </div>
                 }
