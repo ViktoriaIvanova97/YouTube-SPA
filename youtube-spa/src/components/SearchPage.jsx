@@ -26,12 +26,14 @@ const SearchPage = () => {
   const [viewMode, setViewMode] = useState('list')
   const [maxCount, setMaxCount] = useState(12)
   const [sort, setSort] = useState('relevance')
+  const [searchText, setSearchText] = useState('')
 
   const location = useLocation()
 
   const handleSearch = (value) => {
     setQuery(value)
     setMaxCount(12)
+    setSearchText(value)
     dispatch(setQueryAndCount({ query: value, maxCount, sort }))
     dispatch(searchVideos({ query: value, maxCount, sort }))
   }
@@ -39,6 +41,7 @@ const SearchPage = () => {
   useEffect(() => {
     if (location.state?.query) {
       setQuery(location.state.query)
+      setSearchText(location.state.query)
       const count = location.state.maxCount
       const savedSort = location.state.sort || 'relevance'
       setMaxCount(count)
@@ -76,6 +79,10 @@ const SearchPage = () => {
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
+      {!loading && searchText && items.length > 0 && (
+        <h3 style={{ marginTop: 10 }}>Видео по запросу "{searchText}"</h3>
+      )}
+
       <div
         style={{
           marginBottom: 20,
@@ -83,7 +90,6 @@ const SearchPage = () => {
           justifyContent: 'space-between',
         }}
       >
-        <h3>{query ? `Видео по запросу "${query}"` : ''}</h3>
         <div>
           <Button
             icon={<BarsOutlined />}
