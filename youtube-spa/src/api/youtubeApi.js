@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios';
+import axios from 'axios'
 
-const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
-
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
@@ -62,24 +61,29 @@ export const loginUser = createAsyncThunk(
   }
 )
 
-
 export const searchVideos = createAsyncThunk(
   'videos/searchVideos',
-  async ({ query , maxCount }, thunkAPI) => {
+  async ({ query, maxCount, sort = 'relevance' }, thunkAPI) => {
     try {
-      const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-          part: 'snippet',
-          type: 'video',
-          maxResults: maxCount,
-          q: query,
-          key: API_KEY,
-        },
-      });
+      const response = await axios.get(
+        'https://www.googleapis.com/youtube/v3/search',
+        {
+          params: {
+            part: 'snippet',
+            type: 'video',
+            maxResults: maxCount,
+            q: query,
+            order: sort,
+            key: API_KEY,
+          },
+        }
+      )
 
-      return { items: response.data.items, query, maxCount }
+      return { items: response.data.items, query, maxCount, sort }
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.error?.message || error.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.error?.message || error.message
+      )
     }
   }
-);
+)

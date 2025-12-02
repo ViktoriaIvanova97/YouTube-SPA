@@ -25,33 +25,40 @@ const SearchPage = () => {
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = useState('list')
   const [maxCount, setMaxCount] = useState(12)
+  const [sort, setSort] = useState('relevance')
 
   const location = useLocation()
 
   const handleSearch = (value) => {
     setQuery(value)
     setMaxCount(12)
-    dispatch(setQueryAndCount({ query: value, maxCount }))
-    dispatch(searchVideos({ query: value, maxCount }))
+    dispatch(setQueryAndCount({ query: value, maxCount, sort }))
+    dispatch(searchVideos({ query: value, maxCount, sort }))
   }
 
   useEffect(() => {
     if (location.state?.query) {
       setQuery(location.state.query)
       const count = location.state.maxCount
+      const savedSort = location.state.sort || 'relevance'
       setMaxCount(count)
+      setSort(savedSort)
       dispatch(
-        setQueryAndCount({ query: location.state.query, maxCount: count })
+        setQueryAndCount({
+          query: location.state.query,
+          maxCount: count,
+          sort: savedSort,
+        })
       )
       dispatch(
         searchVideos({
           query: location.state.query,
           maxCount: count,
+          sort: savedSort,
         })
       )
     }
   }, [location.state])
-
 
   return (
     <div style={{ width: '100%', boxSizing: 'border-box' }}>
