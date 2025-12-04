@@ -1,10 +1,14 @@
 import { Row, Col, Card } from 'antd'
 
-const VideoGrid = ({ items, maxCount }) => {
+const VideoGrid = ({ items, maxCount,onVideoClick }) => {
   return (
     <Row className="video-grid">
       {items.slice(0, maxCount).map((video) => (
-        <Col key={video.id.videoId} xs={24} sm={12} md={8} lg={6}>
+        <Col
+          key={video.id.videoId}
+          hoverable
+          onClick={() => onVideoClick(video)}
+        >
           <Card hoverable>
             <iframe
               src={`https://www.youtube.com/embed/${video.id.videoId}`}

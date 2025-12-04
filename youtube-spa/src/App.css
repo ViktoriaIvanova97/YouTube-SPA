@@ -113,29 +113,6 @@ body,
   margin-bottom: 20px;
 }
 
-.ant-input {
-  border-radius: 6px;
-  border: 1px solid #d46a8c;
-  background-color: #fff;
-  color: #3a1927;
-}
-
-.ant-input::placeholder {
-  color: #999;
-}
-
-.ant-btn.ant-btn-primary {
-  background-color: #d46a8c !important;
-  border: none !important;
-  color: white !important;
-  border-radius: 6px;
-  font-weight: 500;
-}
-
-.ant-btn.ant-btn-primary:hover {
-  background-color: #c45a6a !important;
-}
-
 .search-heading {
   color: #3a1927;
   font-size: 18px;
@@ -160,25 +137,56 @@ body,
 }
 
 .video-list {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  background-color: rgba(255, 255, 255, 0);
-  /* box-shadow: 0 2px 6px rgba(58, 25, 39, 0.06); 
-  transition: box-shadow 0.2s ease, transform 0.2s ease; */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+
+.video-list-item {
+  width: 100%;
+}
+
+.video-list-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.video-thumb {
+  flex: 0 0 300px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+}
+
+.video-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.video-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a1927;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.video-channel {
+  font-size: 13px;
+  color: #7a6f69;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .ant-col {
   flex: unset !important;
   max-width: unset !important;
   width: 100% !important;
-}
-
-.video-thumb {
-  position: relative;
-  /* width: 100%; */
-  aspect-ratio: 16 / 9;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #f4f1ea;
 }
 
 .video-thumb img {
@@ -207,24 +215,6 @@ body,
   backdrop-filter: saturate(1.2);
 }
 
-.video-meta {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.video-title {
-  color: #3a1927;
-  font-weight: 600;
-  margin: 0 0 6px;
-  line-height: 1.25;
-}
-
-.video-channel {
-  color: #7a6f69;
-  font-size: 13px;
-}
-
 .video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -249,12 +239,6 @@ body,
   font-size: 12px;
 }
 
-.video-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
 .video-card.list .video-title {
   font-size: 16px;
 }
@@ -276,3 +260,119 @@ body,
 .ant-card-meta-detail {
   margin: 0;
 }
+.ant-card-meta-title {
+  margin: 0;
+}
+.ant-card .ant-card-body > div {
+  display: flex;
+  align-items: center;
+}
+
+.ant-card-meta,
+.ant-card-meta-detail {
+  min-width: 0;
+}
+.ant-card-meta,
+.ant-card-meta-detail {
+  min-width: 0;
+}
+
+.ant-btn-variant-solid {
+  background-color: #8a2c3f;
+}
+.ant-btn-variant-solid:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: #a8324a;
+  border-color: #a8324a;
+}
+.ant-input-outlined:hover,
+.ant-input-outlined:focus-within {
+  border: 1px solid #8a2c3f;
+}
+/* --------------------- */
+/* Общий контейнер формы */
+.registerForm {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Заголовки */
+.registerForm h2 {
+  text-align: center;
+  color: #292253;
+  margin-bottom: 10px;
+}
+
+.registerForm h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  margin: 0;
+}
+
+/* Поля ввода */
+.inputRegister {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputRegister:focus {
+  border-color: #8a2c3f;
+  box-shadow: 0 0 6px rgba(138, 44, 63, 0.3);
+  outline: none;
+}
+
+/* Кнопки */
+.registerForm button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #8a2c3f;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registerForm button:hover:not(:disabled) {
+  background-color: #a8324a;
+}
+
+.registerForm button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Блок переключения форм */
+.registerForm div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.registerForm div button {
+  background: transparent;
+  color: #8a2c3f;
+  font-weight: 600;
+  border: 1px solid #8a2c3f;
+  padding: 8px 14px;
+}
+
+.registerForm div button:hover {
+  background: #8a2c3f;
+  color: #fff;
+}
+

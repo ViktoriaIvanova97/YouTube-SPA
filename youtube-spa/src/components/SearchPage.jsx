@@ -13,6 +13,7 @@ import VideoGrid from './shared/VideoGrid'
 import VideoList from './shared/VideoList'
 import SaveHeart from './shared/SaveHeart'
 import { setQueryAndCount } from '../slices/videosSlice'
+import VideoModal from './shared/VideoModal'
 
 const { Search } = Input
 
@@ -28,6 +29,9 @@ const SearchPage = () => {
   const [sort, setSort] = useState('relevance')
   const [searchText, setSearchText] = useState('')
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedVideo, setSelectedVideo] = useState(null)
+
   const location = useLocation()
 
   const handleSearch = (value) => {
@@ -36,6 +40,16 @@ const SearchPage = () => {
     setSearchText(value)
     dispatch(setQueryAndCount({ query: value, maxCount, sort }))
     dispatch(searchVideos({ query: value, maxCount, sort }))
+  }
+
+  const handleOpenModal = (video) => {
+    setSelectedVideo(video)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedVideo(null)
   }
 
   useEffect(() => {
@@ -66,6 +80,7 @@ const SearchPage = () => {
   return (
     <div className="search-page">
       <Search
+        className="custom-search"
         placeholder="Введите запрос"
         enterButton="Поиск"
         size="large"
@@ -73,7 +88,6 @@ const SearchPage = () => {
         onChange={(e) => setQuery(e.target.value)}
         onSearch={handleSearch}
         loading={loading}
-        style={{ maxWidth: 550, marginBottom: 20 }}
         suffix={<SaveHeart query={query} />}
       />
 
@@ -100,27 +114,40 @@ const SearchPage = () => {
           </h3>
         </div>
         <div>
-      <Button
-        icon={<BarsOutlined />}
-        className="view-toggle-btn"
-        type={viewMode === 'list' ? 'primary' : 'default'}
-        onClick={() => setViewMode('list')}
-        style={{ marginRight: 10 }}
-      />
-      <Button
-        icon={<AppstoreOutlined />}
-        className="view-toggle-btn"
-        type={viewMode === 'grid' ? 'primary' : 'default'}
-        onClick={() => setViewMode('grid')}
-      />
-    </div>
+          <Button
+            icon={<BarsOutlined />}
+            className="view-toggle-btn"
+            type={viewMode === 'list' ? 'primary' : 'default'}
+            onClick={() => setViewMode('list')}
+            style={{ marginRight: 10 }}
+          />
+          <Button
+            icon={<AppstoreOutlined />}
+            className="view-toggle-btn"
+            type={viewMode === 'grid' ? 'primary' : 'default'}
+            onClick={() => setViewMode('grid')}
+          />
+        </div>
       </div>
 
       {viewMode === 'list' ? (
-        <VideoList items={items} maxCount={maxCount} />
+        <VideoList
+          items={items}
+          maxCount={maxCount}
+          onVideoClick={handleOpenModal}
+        />
       ) : (
-        <VideoGrid items={items} maxCount={maxCount} />
+        <VideoGrid
+          items={items}
+          maxCount={maxCount}
+          onVideoClick={handleOpenModal}
+        />
       )}
+      <VideoModal
+        open={isModalOpen}
+        video={selectedVideo}
+        onClose={handleCloseModal}
+      />
     </div>
   )
 }

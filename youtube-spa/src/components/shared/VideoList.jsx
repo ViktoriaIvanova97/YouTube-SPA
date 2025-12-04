@@ -1,10 +1,14 @@
 import { Card } from 'antd'
 
-const VideoList = ({ items, maxCount }) => {
+const VideoList = ({ items, maxCount, onVideoClick }) => {
   return (
     <div className="video-list">
       {items.slice(0, maxCount).map((video) => (
-        <Card key={video.id.videoId} hoverable>
+        <Card
+          key={video.id.videoId}
+          hoverable
+          onClick={() => onVideoClick(video)}
+        >
           <div
             style={{
               display: 'flex',
@@ -22,7 +26,7 @@ const VideoList = ({ items, maxCount }) => {
               className="video-thumb"
             />
 
-            <div style={{ width: '100%' }}>
+            <div className="video-meta">
               <Card.Meta
                 title={<div className="video-title">{video.snippet.title}</div>}
                 description={
