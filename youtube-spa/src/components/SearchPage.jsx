@@ -8,7 +8,7 @@ import {
   selectorItemsError,
   selectorItemsLoading,
 } from '../selectors/selectors'
-import { searchVideos } from '../api/youtubeApi'
+import { searchVideos, videoStatistics } from '../api/youtubeApi'
 import VideoGrid from './shared/VideoGrid'
 import VideoList from './shared/VideoList'
 import SaveHeart from './shared/SaveHeart'
@@ -31,7 +31,7 @@ const SearchPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null)
-
+console.log(items);
   const location = useLocation()
 
   const handleSearch = (value) => {
@@ -40,6 +40,13 @@ const SearchPage = () => {
     setSearchText(value)
     dispatch(setQueryAndCount({ query: value, maxCount, sort }))
     dispatch(searchVideos({ query: value, maxCount, sort }))
+      .unwrap()
+      .then((result) => {
+        const ids = result.items.map((v) => v.id.videoId)
+        if (ids.length > 0) {
+          dispatch(videoStatistics(ids))
+        }
+      })
   }
 
   const handleOpenModal = (video) => {
@@ -74,8 +81,15 @@ const SearchPage = () => {
           sort: savedSort,
         })
       )
+        .unwrap()
+        .then((result) => {
+          const ids = result.items.map((v) => v.id.videoId)
+          if (ids.length > 0) {
+            dispatch(videoStatistics(ids))
+          }
+        })
     }
-  }, [location.state])
+  }, [location.state, dispatch])
 
   return (
     <div className="search-page">

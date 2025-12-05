@@ -87,3 +87,34 @@ export const searchVideos = createAsyncThunk(
     }
   }
 )
+
+
+export const videoStatistics = createAsyncThunk(
+  'videos/fetchVideoStatistics',
+  async (videoIds, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        'https://www.googleapis.com/youtube/v3/videos',
+        {
+          params: {
+            part: 'statistics',
+            id: videoIds.join(','), 
+            key: API_KEY,
+          },
+        }
+      )
+
+      const statsMap = {}
+      response.data.items.forEach((video) => {
+        statsMap[video.id] = video.statistics
+      })
+
+      return statsMap
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.error?.message || error.message
+      )
+    }
+  }
+)
+

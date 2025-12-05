@@ -1,6 +1,7 @@
 import { Row, Col, Card } from 'antd'
+import { formatViews } from './formatViews'
 
-const VideoGrid = ({ items, maxCount,onVideoClick }) => {
+const VideoGrid = ({ items, maxCount, onVideoClick }) => {
   return (
     <Row className="video-grid">
       {items.slice(0, maxCount).map((video) => (
@@ -21,8 +22,13 @@ const VideoGrid = ({ items, maxCount,onVideoClick }) => {
             <Card.Meta
               title={<div className="video-title">{video.snippet.title}</div>}
               description={
-                <div className="video-channel">
-                  {video.snippet.channelTitle}
+                <div>
+                  <div className="video-channel">
+                    {video.snippet.channelTitle}
+                  </div>
+                  <div className="video-channel">
+                    {formatViews(video.statistics?.viewCount)}
+                  </div>
                 </div>
               }
             />

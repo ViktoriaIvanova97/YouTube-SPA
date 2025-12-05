@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { searchVideos } from '../api/youtubeApi'
+import { videoStatistics } from '../api/youtubeApi'
 
 const initialState = {
   items: [],
@@ -22,10 +23,6 @@ const videoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(searchVideos.pending, (state) => {
-        state.loading = true
-        state.error = null
-      })
       .addCase(searchVideos.fulfilled, (state, action) => {
         state.items = action.payload.items
         state.query = action.payload.query
@@ -33,10 +30,33 @@ const videoSlice = createSlice({
         state.sort = action.payload.sort
         state.loading = false
       })
-      .addCase(searchVideos.rejected, (state, action) => {
+      .addCase(videoStatistics.fulfilled, (state, action) => {
+        const statsMap = action.payload
+        state.items = state.items.map((video) => ({
+          ...video,
+          statistics: statsMap[video.id.videoId],
+        }))
         state.loading = false
-        state.error = action.payload
       })
+      .addMatcher(
+        (action) =>
+          action.type === searchVideos.pending.type ||
+          action.type === videoStatistics.pending.type,
+        (state) => {
+          state.loading = true
+          state.error = null
+        }
+      )
+
+      .addMatcher(
+        (action) =>
+          action.type === searchVideos.rejected.type ||
+          action.type === videoStatistics.rejected.type,
+        (state, action) => {
+          state.loading = false
+          state.error = action.payload
+        }
+      )
   },
 })
 export const { setQueryAndCount } = videoSlice.actions
