@@ -31,7 +31,7 @@ const SearchPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null)
-console.log(items);
+  console.log(items)
   const location = useLocation()
 
   const handleSearch = (value) => {

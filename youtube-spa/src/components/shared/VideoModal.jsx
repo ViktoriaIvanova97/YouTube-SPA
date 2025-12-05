@@ -1,4 +1,5 @@
 import { Modal, Card } from 'antd'
+import { formatViews } from './formatViews'
 
 const VideoModal = ({ open, video, onClose }) => {
   if (!video) return null
@@ -9,7 +10,7 @@ const VideoModal = ({ open, video, onClose }) => {
       onCancel={onClose}
       footer={null}
       width="90%"
-      style={{ maxWidth: 900, top: 80 }}
+      style={{ maxWidth: 900, top: 60 }}
     >
       <h2>{video.snippet.title}</h2>
       <iframe
@@ -24,7 +25,12 @@ const VideoModal = ({ open, video, onClose }) => {
       <Card.Meta
         title={<div className="video-title">{video.snippet.title}</div>}
         description={
-          <div className="video-channel">{video.snippet.channelTitle}</div>
+          <div>
+            <div className="video-channel">{video.snippet.channelTitle}</div>
+            <div className="video-channel">
+              {formatViews(video.statistics?.viewCount)}
+            </div>
+          </div>
         }
       />
     </Modal>
