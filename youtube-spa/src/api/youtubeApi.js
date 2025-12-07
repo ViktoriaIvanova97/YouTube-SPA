@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
-const API_REGISTER = import.meta.env.API_REGISTER
-const API_LOGIN = import.meta.env.API_LOGIN
-const API_SEARCH_VIDEO = import.meta.env.API_SEARCH_VIDEO
-const API_SEARCH_STATISTICS = import.meta.env.API_SEARCH_STATISTICS
+const API_REGISTER = import.meta.env.VITE_REGISTER
+const API_LOGIN = import.meta.env.VITE_LOGIN
+const API_SEARCH_VIDEO = import.meta.env.VITE_SEARCH_VIDEO
+const API_SEARCH_STATISTICS = import.meta.env.VITE_SEARCH_STATISTICS
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',

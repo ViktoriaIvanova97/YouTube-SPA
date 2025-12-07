@@ -1,5 +1,4 @@
 import { Layout, Menu, Button } from 'antd'
-import { SearchOutlined, StarOutlined, LogoutOutlined } from '@ant-design/icons'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../slices/authSlice'
