@@ -1,10 +1,11 @@
 import { Row, Col, Card } from 'antd'
 import { formatViews } from './formatViews'
 
-const VideoGrid = ({ items, maxCount, onVideoClick }) => {
+const VideoGrid = ({ items, onVideoClick }) => {
+  const API_URL = import.meta.env.VITE_SEARCH_VIDEO_ID
   return (
     <Row className="video-grid">
-      {items.slice(0, maxCount).map((video) => (
+      {items.map((video) => (
         <Col
           key={video.id.videoId}
           hoverable
@@ -12,7 +13,7 @@ const VideoGrid = ({ items, maxCount, onVideoClick }) => {
         >
           <Card hoverable>
             <iframe
-              src={`https://www.youtube.com/embed/${video.id.videoId}`}
+              src={`${API_URL}${video.id.videoId}`}
               title={video.snippet.title}
               frameBorder="0"
               allowFullScreen

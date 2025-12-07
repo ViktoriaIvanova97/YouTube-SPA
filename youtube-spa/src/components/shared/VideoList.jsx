@@ -1,10 +1,11 @@
 import { Card } from 'antd'
 import { formatViews } from './formatViews'
 
-const VideoList = ({ items, maxCount, onVideoClick }) => {
+const VideoList = ({ items, onVideoClick}) => {
+  const API_URL = import.meta.env.VITE_SEARCH_VIDEO_ID
   return (
     <div className="video-list">
-      {items.slice(0, maxCount).map((video) => (
+      {items.map((video) => (
         <Card
           key={video.id.videoId}
           hoverable
@@ -20,7 +21,7 @@ const VideoList = ({ items, maxCount, onVideoClick }) => {
             <iframe
               width="300"
               height="180"
-              src={`https://www.youtube.com/embed/${video.id.videoId}`}
+              src={`${API_URL}${video.id.videoId}`}
               title={video.snippet.title}
               frameBorder="0"
               allowFullScreen

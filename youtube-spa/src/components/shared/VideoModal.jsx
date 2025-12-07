@@ -4,6 +4,8 @@ import { formatViews } from './formatViews'
 const VideoModal = ({ open, video, onClose }) => {
   if (!video) return null
 
+  const API_URL = import.meta.env.VITE_SEARCH_VIDEO_ID
+
   return (
     <Modal
       open={open}
@@ -16,7 +18,7 @@ const VideoModal = ({ open, video, onClose }) => {
       <iframe
         width="100%"
         height="400"
-        src={`https://www.youtube.com/embed/${video.id.videoId}`}
+        src={`${API_URL}${video.id.videoId}`}
         title={video.snippet.title}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

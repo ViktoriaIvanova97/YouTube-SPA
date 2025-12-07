@@ -28,15 +28,12 @@ const SearchPage = () => {
   const [maxCount, setMaxCount] = useState(12)
   const [sort, setSort] = useState('relevance')
   const [searchText, setSearchText] = useState('')
-
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedVideo, setSelectedVideo] = useState(null)
-  console.log(items)
   const location = useLocation()
 
   const handleSearch = (value) => {
     setQuery(value)
-    setMaxCount(12)
     setSearchText(value)
     dispatch(setQueryAndCount({ query: value, maxCount, sort }))
     dispatch(searchVideos({ query: value, maxCount, sort }))
@@ -145,17 +142,9 @@ const SearchPage = () => {
       </div>
 
       {viewMode === 'list' ? (
-        <VideoList
-          items={items}
-          maxCount={maxCount}
-          onVideoClick={handleOpenModal}
-        />
+        <VideoList items={items} onVideoClick={handleOpenModal} />
       ) : (
-        <VideoGrid
-          items={items}
-          maxCount={maxCount}
-          onVideoClick={handleOpenModal}
-        />
+        <VideoGrid items={items} onVideoClick={handleOpenModal} />
       )}
       <VideoModal
         open={isModalOpen}
