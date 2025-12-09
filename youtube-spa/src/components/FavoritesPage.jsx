@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { selectorFavorites } from '../selectors/selectors'
-import { Card, Button, Space, Form } from 'antd'
+import { Form } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import SaveQueryModal from './shared/Modal'
 import { updateFavorite, deleteFavorite } from '../slices/favoriteSlice'
+import  FavoriteCard  from './shared/FavoriteCard'
 
 const FavoritesPage = () => {
   const favorites = useSelector(selectorFavorites)
@@ -34,16 +35,8 @@ const FavoritesPage = () => {
   }
 
   const handleSave = (values) => {
-    dispatch(
-      updateFavorite({
-        id: editingItem.id,
-        query: values.query,
-        name: values.name,
-        sort: values.sort,
-        maxCount,
-      })
-    )
-    setModalOpen(false)
+    dispatch(updateFavorite({ id: editingItem.id, ...values }))
+    setEditingItem(null)
   }
 
   const handleDelete = (id) => {
@@ -54,20 +47,12 @@ const FavoritesPage = () => {
     <div>
       <h2>Избранное</h2>
       {favorites.map((item) => (
-        <Card
+        <FavoriteCard
           key={item.id}
-          title={item.name}
-          extra={
-            <Space>
-              <Button type="primary" onClick={() => handleExecute(item)}>
-                Выполнить
-              </Button>
-              <Button onClick={() => handleEdit(item)}>Редактировать</Button>
-              <Button danger onClick={() => handleDelete(item.id)}>
-                Удалить
-              </Button>
-            </Space>
-          }
+          item={item}
+          onExecute={handleExecute}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
           bodyStyle={{ display: 'none' }}
         />
       ))}

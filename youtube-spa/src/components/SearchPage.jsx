@@ -45,7 +45,6 @@ const SearchPage = () => {
         }
       })
   }
-
   const handleOpenModal = (video) => {
     setSelectedVideo(video)
     setIsModalOpen(true)

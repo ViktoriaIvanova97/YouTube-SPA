@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Tooltip, message, Form } from 'antd'
 import { HeartOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
@@ -27,7 +27,6 @@ const SaveHeart = ({ query }) => {
     })
     setModalOpen(true)
   }
-
   return (
     <>
       <Tooltip title="Сохранить в избранное">
@@ -58,4 +57,4 @@ const SaveHeart = ({ query }) => {
   )
 }
 
-export default SaveHeart
+export default memo(SaveHeart)
