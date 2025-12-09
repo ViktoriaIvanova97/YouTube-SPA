@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
 import { useLocation } from 'react-router-dom'
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy , Suspense} from 'react'
 import {
   selectorItems,
   selectorItemsError,
@@ -13,7 +13,7 @@ import VideoGrid from './shared/VideoGrid'
 import VideoList from './shared/VideoList'
 import SaveHeart from './shared/SaveHeart'
 import { setQueryAndCount } from '../slices/videosSlice'
-import VideoModal from './shared/VideoModal'
+const VideoModal = lazy(() => import('./shared/VideoModal'))
 
 const { Search } = Input
 
@@ -145,11 +145,13 @@ const SearchPage = () => {
       ) : (
         <VideoGrid items={items} onVideoClick={handleOpenModal} />
       )}
-      <VideoModal
-        open={isModalOpen}
-        video={selectedVideo}
-        onClose={handleCloseModal}
-      />
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <VideoModal
+          open={isModalOpen}
+          video={selectedVideo}
+          onClose={handleCloseModal}
+        />
+      </Suspense>
     </div>
   )
 }
