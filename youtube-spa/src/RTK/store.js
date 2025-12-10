@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
-import authReducer from '../slices/authSlice'
-import videosReducer from '../slices/videosSlice'
-import favoritesReducer from '../slices/favoriteSlice'
+import authReducer from '../RTK/slices/authSlice'
+import videosReducer from '../RTK/slices/videosSlice'
+import favoritesReducer from '../RTK/slices/favoriteSlice'
 
 const authPersistConfig = {
   key: 'auth',

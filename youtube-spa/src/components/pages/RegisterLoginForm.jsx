@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { registerUser, loginUser} from '../api/youtubeApi'
+import { registerUser, loginUser} from '../../api/youtubeApi'
 import {
   selectorError,
   selectorLoading,
-} from '../selectors/selectors'
+} from '../../RTK/selectors/selectors'
 
 const RegisterForm = () => {
   const navigate = useNavigate()

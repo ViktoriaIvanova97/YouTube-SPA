@@ -1,4 +1,4 @@
-import VideoCardGrid from './VideoCardGrid'
+import VideoCardGrid from '../shared/VideoCardGrid'
 
 const VideoGrid = ({ items, onVideoClick }) => {
   return (

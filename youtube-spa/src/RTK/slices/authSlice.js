@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { registerUser, loginUser } from '../api/youtubeApi'
+import { registerUser, loginUser } from '..//..//api/youtubeApi'
 
 const initialState = {
   token: null,

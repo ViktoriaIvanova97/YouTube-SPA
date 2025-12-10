@@ -2,16 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
-const API_REGISTER = import.meta.env.VITE_REGISTER
-const API_LOGIN = import.meta.env.VITE_LOGIN
-const API_SEARCH_VIDEO = import.meta.env.VITE_SEARCH_VIDEO
-const API_SEARCH_STATISTICS = import.meta.env.VITE_SEARCH_STATISTICS
+const API_AUTH = import.meta.env.VITE_AUTH
+const API_YOUTUBE = import.meta.env.VITE_YOUTUBE
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async ({ username, email, password, gender, age }, thunkAPI) => {
     try {
-      const res = await fetch(`${API_REGISTER}`, {
+      const res = await fetch(`${API_AUTH}/users/register`, {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -37,7 +35,7 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, thunkAPI) => {
     try {
-      const res = await fetch(`${API_LOGIN}`, {
+      const res = await fetch(`${API_AUTH}/auth/login`, {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -63,7 +61,7 @@ export const searchVideos = createAsyncThunk(
   'videos/searchVideos',
   async ({ query, maxCount, sort }, thunkAPI) => {
     try {
-      const response = await axios.get(`${API_SEARCH_VIDEO}`, {
+      const response = await axios.get(`${API_YOUTUBE}/v3/search`, {
         params: {
           part: 'snippet',
           type: 'video',
@@ -73,6 +71,9 @@ export const searchVideos = createAsyncThunk(
           key: API_KEY,
         },
       })
+      const videoIds = response.data.items.map((item) => item.id.videoId)
+
+      thunkAPI.dispatch(videoStatistics(videoIds))
 
       return { items: response.data.items, query, maxCount, sort }
     } catch (error) {
@@ -87,7 +88,7 @@ export const videoStatistics = createAsyncThunk(
   'videos/fetchVideoStatistics',
   async (videoIds, thunkAPI) => {
     try {
-      const response = await axios.get(`${API_SEARCH_STATISTICS}`, {
+      const response = await axios.get(`${API_YOUTUBE}/v3/videos`, {
         params: {
           part: 'statistics',
           id: videoIds.join(','),

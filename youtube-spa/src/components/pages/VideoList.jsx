@@ -1,4 +1,4 @@
-import VideoCardList from './VideoCardList'
+import VideoCardList from '../shared/VideoCardList'
 
 const VideoList = ({ items, onVideoClick }) => (
   <div className="video-list">

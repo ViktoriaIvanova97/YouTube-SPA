@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { searchVideos } from '../api/youtubeApi'
-import { videoStatistics } from '../api/youtubeApi'
+import { searchVideos } from '..//../api/youtubeApi'
+import { videoStatistics } from '..//../api/youtubeApi'
 
 const initialState = {
   items: [],
@@ -47,7 +47,6 @@ const videoSlice = createSlice({
           state.error = null
         }
       )
-
       .addMatcher(
         (action) =>
           action.type === searchVideos.rejected.type ||

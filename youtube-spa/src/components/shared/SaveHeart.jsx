@@ -2,7 +2,7 @@ import { useState, memo, Suspense, lazy} from 'react'
 import { Tooltip, message, Form } from 'antd'
 import { HeartOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
-import { addFavorite } from '../../slices/favoriteSlice'
+import { addFavorite } from '..//../RTK/slices/favoriteSlice'
 const SaveQueryModal = lazy(() => import('../shared/Modal'))
 
 const SaveHeart = ({ query }) => {

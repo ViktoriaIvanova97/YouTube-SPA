@@ -2,7 +2,7 @@ import { Layout, Menu, Button } from 'antd'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useCallback, useMemo } from 'react'
-import { logout } from '../slices/authSlice'
+import { logout } from '..//../RTK/slices/authSlice'
 
 const { Header, Content } = Layout
 

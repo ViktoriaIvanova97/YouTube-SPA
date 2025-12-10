@@ -7,13 +7,13 @@ import {
   selectorItems,
   selectorItemsError,
   selectorItemsLoading,
-} from '../selectors/selectors'
-import { searchVideos, videoStatistics } from '../api/youtubeApi'
-import VideoGrid from './shared/VideoGrid'
-import VideoList from './shared/VideoList'
-import SaveHeart from './shared/SaveHeart'
-import { setQueryAndCount } from '../slices/videosSlice'
-const VideoModal = lazy(() => import('./shared/VideoModal'))
+} from '../../RTK/selectors/selectors'
+import { searchVideos} from '../../api/youtubeApi'
+import VideoGrid from './VideoGrid'
+import VideoList from './VideoList'
+import SaveHeart from '../shared/SaveHeart'
+import { setQueryAndCount } from '..//../RTK/slices/videosSlice'
+const VideoModal = lazy(() => import('../shared/VideoModal'))
 
 const { Search } = Input
 
@@ -37,13 +37,6 @@ const SearchPage = () => {
     setSearchText(value)
     dispatch(setQueryAndCount({ query: value, maxCount, sort }))
     dispatch(searchVideos({ query: value, maxCount, sort }))
-      .unwrap()
-      .then((result) => {
-        const ids = result.items.map((v) => v.id.videoId)
-        if (ids.length > 0) {
-          dispatch(videoStatistics(ids))
-        }
-      })
   }
   const handleOpenModal = (video) => {
     setSelectedVideo(video)
@@ -77,13 +70,6 @@ const SearchPage = () => {
           sort: savedSort,
         })
       )
-        .unwrap()
-        .then((result) => {
-          const ids = result.items.map((v) => v.id.videoId)
-          if (ids.length > 0) {
-            dispatch(videoStatistics(ids))
-          }
-        })
     }
   }, [location.state, dispatch])
 

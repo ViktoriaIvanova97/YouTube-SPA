@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import RegisterForm from './components/RegisterLoginForm'
-import Home from './components/Home'
-import SearchPage from './components/SearchPage'
-const FavoritesPage = lazy(() => import('./components/FavoritesPage'))
+import RegisterForm from './components/pages/RegisterLoginForm'
+import Home from './components/pages/Home'
+import SearchPage from './components/pages/SearchPage'
+const FavoritesPage = lazy(() => import('./components/pages/FavoritesPage'))
 import './App.css'
 
 function App() {

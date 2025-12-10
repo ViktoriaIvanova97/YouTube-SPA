@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
-import { selectorFavorites } from '../selectors/selectors'
+import { selectorFavorites } from '../../RTK/selectors/selectors'
 import { Form } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import SaveQueryModal from './shared/Modal'
-import { updateFavorite, deleteFavorite } from '../slices/favoriteSlice'
-import  FavoriteCard  from './shared/FavoriteCard'
+import SaveQueryModal from '../shared/Modal'
+import { updateFavorite, deleteFavorite } from '../../slices/favoriteSlice'
+import  FavoriteCard  from '../shared/FavoriteCard'
 
 const FavoritesPage = () => {
   const favorites = useSelector(selectorFavorites)
