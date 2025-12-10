@@ -4,7 +4,7 @@ import { selectorFavorites } from '../../RTK/selectors/selectors'
 import { Form } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import SaveQueryModal from '../shared/Modal'
-import { updateFavorite, deleteFavorite } from '../../slices/favoriteSlice'
+import { updateFavorite, deleteFavorite } from '..//../RTK/slices/favoriteSlice'
 import  FavoriteCard  from '../shared/FavoriteCard'
 
 const FavoritesPage = () => {
